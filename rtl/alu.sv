@@ -10,8 +10,6 @@ module alu
     output logic rx_o
 );
 
-    logic clk_i;
-    logic rst_ni;
     logic tx_data;
     logic tx_valid;
     logic tx_ready;
