@@ -14,6 +14,10 @@ module alu
     logic tx_valid;
     logic tx_ready;
 
+    logic rx_data;
+    logic rx_valid;
+    logic rx_ready;
+
     uart_tx #(
         .DATA_WIDTH(DATA_WIDTH)
     ) inst_tx (
@@ -27,38 +31,19 @@ module alu
         .prescale()
     );
 
-    // module uart_rx #
-    // (
-    //     parameter DATA_WIDTH = 8
-    // )
-    // (
-    //     input  wire                   clk,
-    //     input  wire                   rst,
-
-    //     /*
-    //      * AXI output
-    //      */
-    //     output wire [DATA_WIDTH-1:0]  m_axis_tdata,
-    //     output wire                   m_axis_tvalid,
-    //     input  wire                   m_axis_tready,
-
-    //     /*
-    //      * UART interface
-    //      */
-    //     input  wire                   rxd,
-
-    //     /*
-    //      * Status
-    //      */
-    //     output wire                   busy,
-    //     output wire                   overrun_error,
-    //     output wire                   frame_error,
-
-    //     /*
-    //      * Configuration
-    //      */
-    //     input  wire [15:0]            prescale
-
-    // );
+    uart_rx #(
+        .DATA_WIDTH(DATA_WIDTH)
+    ) inst_rx (
+        .clk(clk_i),
+        .rst(rst_ni),
+        .m_axis_tdata(rx_data),
+        .m_axis_tvalid(rx_valid),
+        .m_axis_tready(rx_ready),
+        .rxd(),
+        .busy(),
+        .overrun_error(),
+        .frame_error(),
+        .prescale()
+    );
 
 endmodule
